@@ -113,7 +113,7 @@ class TripService {
 
 const tripService = new TripService;
 tripService.findByName('Nantes')
-    .then(tripTrouve => console.log(tripTrouve))
+    .then(tripTrouve => console.log(`Trip found: ${tripTrouve}`))
     .catch(err => console.log(err));
 
 class PriceService {
