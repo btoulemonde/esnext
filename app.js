@@ -74,9 +74,10 @@ const defaultTrip = Trip.getDefaultTrip();
 
 // heritage
 class FreeTrip extends Trip {
-    price = 0;
+    
     constructor(id, name, imageUrl, ) {
         super(id, name, imageUrl);
+        this.price = 0;
     }
     toString() {
         return 'Free' + super.toString();
@@ -84,7 +85,7 @@ class FreeTrip extends Trip {
 }
 
 const freeTrip = new FreeTrip('nantes', 'Nantes', 'img/nantes.jpg');
-//console.log(freeTrip.toString());
+console.log(freeTrip.toString());
 
 //Promise, Set, Map, Arrow Function
 class TripService {
@@ -112,10 +113,6 @@ class TripService {
     }
 }
 
-const tripService = new TripService;
-tripService.findByName('Nantes')
-    .then(tripTrouve => console.log('Trip found: ', tripTrouve))
-    .catch(err => console.log(err));
 
 class PriceService {
     constructor() {
@@ -138,7 +135,15 @@ class PriceService {
         });
     }
 }
+
+const tripService = new TripService;
 const priceService = new PriceService;
-priceService.findPriceByTripId('paris')
-.then(priceTrouve => console.log(`le prix est de ${priceTrouve} €`))
-.catch(err => console.log(err));
+
+tripService.findByName('Rio de Janeiro')
+    .then(tripTrouve => priceService.findPriceByTripId(tripTrouve.id))
+    .then(priceTrouve => console.log(`le prix est de ${priceTrouve} €`))
+    .catch(err => console.log(err));
+    tripService.findByName('Nantes')
+    .then(tripTrouve => priceService.findPriceByTripId(tripTrouve.id))
+    .then(priceTrouve => console.log(`le prix est de ${priceTrouve} €`))
+    .catch(err => console.log(err));
