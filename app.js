@@ -98,11 +98,12 @@ class TripService {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
 
-                for (const trip of this.trips) {
-                    if (trip.name === tripName) {
-                        resolve(trip);
-                    }
-                }
+               this.trips.forEach(e =>{
+                   if(e.name === tripName){
+                    resolve(e);
+                   }
+               })
+                   
                 reject(`no trip with name ${tripName} `)
                 // ici l'exécution du code est asynchrone
                 // TODO utiliser resolve et reject en fonction du résultat de la recherche
